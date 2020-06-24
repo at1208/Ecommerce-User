@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Drawer from './drawer';
 import Search from './search';
-import Menu from './menu';
 import {Button} from 'antd';
 import SignIn from '../auth/signinModal';
 import SignUp from '../auth/signupModal';

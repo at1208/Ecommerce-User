@@ -1,18 +1,25 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Drawer } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { isAuth,signout } from '../../actions/auth';
+import { isAuth,signout, userProfile,getCookie } from '../../actions/auth';
 import { getAllCategory } from '../../actions/category';
 import Button from '@material-ui/core/Button';
 import SignIn from '../auth/signinModal';
 import SignUp from '../auth/signupModal';
 import Router from "next/router";
 import Link from 'next/link'
+ 
+
 
 
 const App = () => {
   const [visible, setVisible] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [userAddress, setUserAddress] = useState();
+
+  const token = getCookie('token');
+  const userId = isAuth() && isAuth()._id
+
   const showDrawer = () => {
     setVisible(true);
   };
@@ -28,6 +35,10 @@ const App = () => {
 }
 
 useEffect(() => {
+  userProfile(userId, token)
+  .then((value) => setUserAddress(value.address))
+  .catch((err) => {console.log(err)})
+
   getAllCategory()
     .then((res) => setCategories(res))
     .catch(err => console.log(err))
@@ -56,6 +67,9 @@ const showCategories = () => {
         width={250}
       >
       <div className="pb-5">
+      {isAuth() && <div className="drawer-address-container">
+        <div className="drawer-address-title">{userAddress}</div>
+      </div>}
       {!isAuth() &&
           <div className="d-none d-sm-block d-md-none d-block d-sm-none">
               <div className="mt-1 mb-1">
@@ -66,11 +80,23 @@ const showCategories = () => {
               </div>
        </div>}
 
+       {isAuth() && <div className="mt-1 mb-1">
+          <Button   variant="contained" className="drawer-my-cart-btn" fullWidth onClick={() => Router.replace('/profile')}>
+            Profile
+          </Button>
+        </div>}
+
       {isAuth() && <div className="mt-1 mb-1">
          <Button   variant="contained" className="drawer-my-cart-btn" fullWidth onClick={() => Router.replace('/product/cart')}>
             My Cart
          </Button>
        </div>}
+
+       {isAuth() && <div className="mt-1 mb-1">
+          <Button   variant="contained" className="drawer-my-cart-btn" fullWidth onClick={() => Router.replace('/product/cart')}>
+             My Order
+          </Button>
+        </div>}
 
         <div className="mt-3 mb-2">
           <div className="drawer-subtitle">SHOP BY CATEGORY</div>

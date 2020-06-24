@@ -18,8 +18,8 @@ const userId = isAuth() && isAuth()._id;
 
   const showCartProduct = () => {
       return cart && cart.result && cart.result.map((product,i) => {
-           return <div className="m-3 card col-lg-2 col-md-3 col-sm-4">
-                   <CartCard data={product} key={i}/>
+           return <div className="m-3 card col-lg-2 col-md-3 col-sm-4" key={i}>
+                   <CartCard data={product} />
                   </div>
       })
   }

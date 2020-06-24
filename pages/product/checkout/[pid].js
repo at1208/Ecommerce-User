@@ -11,6 +11,25 @@ const Checkout = ({ data }) => {
             </div>
  }
 
+ const paymentHandler = () => {
+     const options = {
+     key: process.env.NEXT_PUBLIC_RZPID,
+     amount:  1*100,
+     currency: 'INR',
+     name: 'Payments',
+     order_id: "orderID",
+ 
+     handler(response) {
+       console.log(response)
+      PaymentVerification(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature)
+        .then((res) => console.log(res))
+        .catch(err => console.log(err))
+       }
+     }
+     const razorpay = new window.Razorpay(options);
+     razorpay.open()
+ }
+
   return <Fragment>
             <Layout>
                <div className="product-checkout-page-container row justify-content-center">

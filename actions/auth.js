@@ -3,6 +3,7 @@ import cookie from 'js-cookie';
 
 import Router from 'next/router';
 
+
 //SEESION IS EXPIRE
 export const handleResponse = response => {
     if (response.status === 401) {
@@ -192,6 +193,40 @@ export const resetPassword = resetInfo => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(resetInfo)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const userProfile = (userId,token) => {
+    return fetch(`${process.env.NEXT_PUBLIC_API}/user/${userId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+
+        },
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+
+
+export const updateProfile = (user, token) => {
+    return fetch(`${process.env.NEXT_PUBLIC_API}/user/profile`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(user)
     })
         .then(response => {
             return response.json();

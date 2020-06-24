@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/layout'
-import Home from '../components/pages/home/home'
+import Home from '../components/home/home'
 import { homepageProducts } from '../actions/product'
 import CarouselContainer from '../components/carousel/carousel'
 

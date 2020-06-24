@@ -27,3 +27,18 @@ export const getProductBySlug = (slug) => {
         })
         .catch(err => console.log(err));
 };
+
+export const searchProduct = (term) => {
+  console.log(term)
+    return fetch(`${process.env.NEXT_PUBLIC_API}/product?search=${term}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
