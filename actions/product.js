@@ -42,3 +42,19 @@ export const searchProduct = (term) => {
         })
         .catch(err => console.log(err));
 };
+
+
+
+export const productById = (id) => {
+    return fetch(`${process.env.NEXT_PUBLIC_API}/product/${id}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};

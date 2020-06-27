@@ -8,7 +8,7 @@ import SignIn from '../auth/signinModal';
 import SignUp from '../auth/signupModal';
 import Router from "next/router";
 import Link from 'next/link'
- 
+
 
 
 
@@ -93,7 +93,7 @@ const showCategories = () => {
        </div>}
 
        {isAuth() && <div className="mt-1 mb-1">
-          <Button   variant="contained" className="drawer-my-cart-btn" fullWidth onClick={() => Router.replace('/product/cart')}>
+          <Button   variant="contained" className="drawer-my-cart-btn" fullWidth onClick={() => Router.replace('/myorder')}>
              My Order
           </Button>
         </div>}

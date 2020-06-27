@@ -1,7 +1,6 @@
 
 //CREATE ORDER
 export const createOrder = product => {
-  console.log(product)
     return fetch(`${process.env.NEXT_PUBLIC_API}/order/create`, {
         method: 'POST',
         headers: {
@@ -17,15 +16,29 @@ export const createOrder = product => {
 };
 
 //ORDER VERIFICATION
-export const orderVerify = product => {
-  console.log(product)
+export const orderVerify = (fuck) => {
     return fetch(`${process.env.NEXT_PUBLIC_API}/order/verify`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(fuck)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+//GET ALL ORDERS OF A USER
+export const allOrdersOfUser = (userId) => {
+    return fetch(`${process.env.NEXT_PUBLIC_API}/order/user/${userId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
     })
         .then(response => {
             return response.json();

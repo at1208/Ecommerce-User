@@ -1,8 +1,6 @@
 import React, { Fragment} from 'react';
 
 const Checkout = ({ pay, product }) => {
-  console.log(pay)
-  console.log(product)
   const showCheckout = () => {
     return product && product.map((item, i) => {
       return  <div className="m-1" key={i}>
