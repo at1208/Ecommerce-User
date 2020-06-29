@@ -22,7 +22,9 @@ const Checkout = ({ data }) => {
             </div>
  }
 
-
+ const totalPrice = () => {
+   
+ }
 
  const generateOrder = () => {
  const order = {
@@ -31,6 +33,7 @@ const Checkout = ({ data }) => {
              order_amount: totalPrice() }
    createOrder(order)
      .then(res => {
+       console.log(res)
        setOrderID(res.order_id)
        setPayStatus(true)
      })
