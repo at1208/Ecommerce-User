@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import Layout from '../../../components/layout/layout';
 import { getProductBySlug } from '../../../actions/product';
-import ProductCard from '../../../components/cart/card';
+import ProductCard from '../../../components/product/checkoutCard';
 import { createOrder, orderVerify } from '../../../actions/order';
 import { isAuth } from '../../../actions/auth';
 import { Button } from 'antd';
@@ -11,26 +11,28 @@ const Checkout = ({ data }) => {
 
   const userId = isAuth() && isAuth()._id
   const [orderID, setOrderID]= useState();
+  const [count, setCount] = useState(1);
   const [payStatus, setPayStatus] = useState(false)
   const [orderVerification, setOrderVerification] = useState();
 
 
-  console.log(data)
  const showProduct = () => {
      return  <div className="product-checkout-page-card card col-md-4 col-sm-5 p-2">
-              <ProductCard data={data}/>
+              <ProductCard data={data} value={onCount}/>
             </div>
  }
 
- const totalPrice = () => {
-   
- }
+
+  const onCount = (value) => {
+      setCount(value)
+   }
 
  const generateOrder = () => {
  const order = {
              userId: userId,
-             products: {product: data, count: data.count, price: data.price},
-             order_amount: totalPrice() }
+             products: [{product: data._id, count: count, price: data.price}],
+             order_amount: count*data.price }
+
    createOrder(order)
      .then(res => {
        console.log(res)
@@ -54,15 +56,20 @@ const Checkout = ({ data }) => {
  const paymentHandler = () => {
      const options = {
      key: process.env.NEXT_PUBLIC_RZPID,
-     amount:  1*100,
+     amount:  count*data.price,
      currency: 'INR',
      name: 'Payments',
-     order_id: "orderID",
+     order_id: orderID,
 
      handler(response) {
-       console.log(response)
-      PaymentVerification(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature)
-        .then((res) => console.log(res))
+       const fuck = {
+         order_id:response.razorpay_order_id,
+         payment_id:response.razorpay_payment_id,
+         razorpay_signature:response.razorpay_signature,
+         userId: userId
+       }
+      orderVerify(fuck)
+        .then((res) =>  onOrderverification(res))
         .catch(err => console.log(err))
        }
      }

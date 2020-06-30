@@ -5,8 +5,8 @@ import { GrAdd,GrSubtract } from "react-icons/gr";
 import {incrementCountCart, decrementCountCart} from '../../actions/cart';
 
 const Cart = ({ data }) => {
-const [count, setCount] = useState();
 
+const [count, setCount] = useState();
 const increment = () => {
   incrementCountCart(data._id, data.product)
      .then((value) => setCount(value.data.count))
@@ -18,6 +18,7 @@ const decrement = () => {
      .then((value) =>  setCount(value.data.count))
      .catch((err) => { console.log(err)})
 }
+
 
   return <Fragment>
             <div className="cart-card">
