@@ -7,9 +7,11 @@ const SearchedProduct = ({ data }) => {
 
  const showResult = () => {
     return data && data.map((product, i) => {
-      return <div className="col-md-3" key={i}>
+    return( <div><h1>Search Result : <small>{product.name}</small></h1>
+            <div className="col-md-3" key={i}>
                 <ProductCard data={product} />
-             </div>
+             </div></div>
+             );
     })
  }
 

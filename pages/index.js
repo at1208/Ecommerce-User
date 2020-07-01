@@ -7,7 +7,6 @@ import CarouselContainer from '../components/carousel/carousel'
 const App = ({ data }) => {
 
  const showCarousel = () => {
-   console.log(data)
    return data && data.map((item,i) => {
      return <Fragment key={i}>
               <CarouselContainer products={item} />

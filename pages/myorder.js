@@ -17,6 +17,9 @@ const MyOrder = () => {
 const showOrder = () => {
     return orders && orders.map((item, i) => {
       return <div key={i}>
+            <br/>
+            <br/>
+                <h3><u>Order {i+1} </u></h3>
                 <OrderCard data={item}/>
              </div>
     })
@@ -25,9 +28,14 @@ const showOrder = () => {
 
   return <Fragment>
           <Layout>
+          <div className="container-fluid row col justify-content-center">
+          <div className="text-center card col-md-9">
            <div className="myorder-page-container">
+            <h1>Total Orders</h1>
                {showOrder()}
            </div>
+           </div>
+          </div>
           </Layout>
         </Fragment>
 }

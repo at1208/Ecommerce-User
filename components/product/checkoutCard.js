@@ -21,7 +21,7 @@ const Card = ({ data, value }) => {
 
   return <Fragment>
               <div className="cart-card">
-                   <img src="https://img.grouponcdn.com/deal/3H5QzVtGHYD8P51AMbu7KD1QoLr4/3H-1561x937/v1/c700x420.jpg" className="img img-fluid"/>
+                   <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512" className="img img-fluid"/>
 
                    <div className="cart-card-title">
                      {data.name}

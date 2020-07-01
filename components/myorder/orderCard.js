@@ -1,8 +1,25 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { productById } from '../../actions/product';
 import moment from 'moment';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+});
+
 
 const OrderCard  = ({ data }) => {
+  
+  const classes = useStyles();
  const [orderedItem, setOrderedItem] = useState();
 
   const product = async () => {
@@ -19,17 +36,18 @@ const OrderCard  = ({ data }) => {
    product()
   }, [])
 
+
+ 
  const showOrderedProduct = () => {
    return orderedItem && orderedItem.map((item, i) => {
 
-      return <div key={i} className="">
-               <div className="">
-                 {i+1}.{item.product.name}
-               </div>
-               <div>
-                {item.count} X ₹{item.product.price}
-               </div>
-             </div>
+      return(
+                <TableRow key={item.product.name}>
+                  <TableCell>{i+1}. {item.product.name}</TableCell>
+                  <TableCell align="right">{item.count}</TableCell>
+                  <TableCell align="right">₹{item.product.price}</TableCell>
+                  <TableCell align="right">{item.product.price * item.count}</TableCell>
+                </TableRow>);
    })
  }
 
@@ -37,15 +55,35 @@ const OrderCard  = ({ data }) => {
 
   return <Fragment>
             <div className="container-fluid row col justify-content-center">
-              <div className="text-center card col-md-5">
-                {showOrderedProduct()}
-                {data && moment(data.createdAt).format('LLLL')}
-                <br />
-                {data && data.order_id}
+              <div className="text-center card col-md-8">
+              <p>Order Date - {data && moment(data.createdAt).format('LLLL')}</p>
+              <p>Order ID - {data && data.order_id}</p>
                   <br />
                 {data && data.status}
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="spanning table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center" colSpan={3}>
+                      <b>Details</b>
+                      </TableCell>
+                      <TableCell align="right"><b>Price</b></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell><b>Desc</b></TableCell>
+                      <TableCell align="right"><b>Qty.</b></TableCell>
+                      <TableCell align="right"><b>Unit</b></TableCell>
+                      <TableCell align="right"><b>Sum</b></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {showOrderedProduct()}
+                  </TableBody>
+                </Table>
+              </TableContainer>
                   <br />
-                {payment}
+                <h6 style={{color:"red"}}>Payment Status - {payment}</h6>
+              <br/>
               </div>
             </div>
          </Fragment>
