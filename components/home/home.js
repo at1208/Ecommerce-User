@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
- 
+
 
 const Home = () => {
   return <Fragment>
@@ -21,7 +21,7 @@ const Home = () => {
               <div className="col-md-2 homepage-banner-3-1">
                 <div className="row col">
                    <div className="col-6">
-                      <img src="static/images/banner24.svg" className="banner-3-image"  />
+                      <img src="static/images/banner24.svg" className="banner-3-image" />
                    </div>
                    <div className="col-6">
                    <h6 className="homepage-banner-3-text">Shop globally</h6>

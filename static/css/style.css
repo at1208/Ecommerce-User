@@ -377,7 +377,7 @@
 }
 
 .banner-3-image {
-    width: 100px;
+    width: 70px;
     height: 80px;
 }
 
@@ -1394,9 +1394,65 @@
 
 
 /* Carousel */
-
 .ant-carousel .slick-slide {
     height: 60px;
     overflow: hidden;
     color: black;
+}
+
+
+/*---------------------
+  About Us
+-----------------------*/
+.about-us-container{
+  padding-top: 100px;
+}
+
+
+
+/*---------------------
+  Cancellation and Return
+-----------------------*/
+.cancellation-and-return-container{
+  padding-top: 100px;
+}
+
+
+/*---------------------
+Contact Us
+-----------------------*/
+.contact-us-container{
+  padding-top: 100px;
+}
+
+
+/*---------------------
+Payment
+-----------------------*/
+.payment-container{
+  padding-top: 100px;
+}
+
+
+/*---------------------
+Return Policy
+-----------------------*/
+.return-policy-container{
+  padding-top: 100px;
+}
+
+
+/*---------------------
+Shipping
+-----------------------*/
+.shipping-container{
+  padding-top: 100px;
+}
+
+
+/*---------------------
+Term of Use
+-----------------------*/
+.term-of-use-container{
+    padding-top: 100px;
 }
