@@ -32,7 +32,7 @@ const Footer = () => {
                               <a>About Us</a>
                             </Link>
                         </li>
-                       
+
                         </ul>
                     </div>
                     </div>
@@ -76,8 +76,8 @@ const Footer = () => {
                               </Link>
                         </li>
                         <li id="menu-item-178960" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178960">
-                              <Link href="/policy">
-                                <a href="#">Privacy</a>
+                              <Link href="/privacy">
+                                <a>Privacy</a>
                               </Link>
                         </li>
                         </ul>
