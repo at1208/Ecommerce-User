@@ -21,7 +21,7 @@ const Card = ({ data }) => {
             </div>
             <Button size="small" fullWidth className="product-card-button">₹{data.price}</Button> */}
             
-           <Card1  hoverable={true} bordered={true} style={{ width: 250} } size={"small"}
+           <Card1  hoverable={true} bordered={true} size={"small"}
               cover={
                 <img
                   alt="Product Image"

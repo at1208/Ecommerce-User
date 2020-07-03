@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { productById } from '../../actions/product';
 import moment from 'moment';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,12 +9,37 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Collapse } from 'antd';
+
+const { Panel } = Collapse;
+
+function callback(key) {
+  console.log(key);
+}
 
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: "#212529",
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 
 const OrderCard  = ({ data }) => {
@@ -42,47 +67,58 @@ const OrderCard  = ({ data }) => {
    return orderedItem && orderedItem.map((item, i) => {
 
       return(
-                <TableRow key={item.product.name}>
-                  <TableCell>{i+1}. {item.product.name}</TableCell>
-                  <TableCell align="right">{item.count}</TableCell>
-                  <TableCell align="right">₹{item.product.price}</TableCell>
-                  <TableCell align="right">{item.product.price * item.count}</TableCell>
-                </TableRow>);
+                <StyledTableRow key={item.product.name}>
+                  <StyledTableCell>{i+1}. {item.product.name}</StyledTableCell>
+                  <StyledTableCell align="right">{item.count}</StyledTableCell>
+                  <StyledTableCell align="right">₹{item.product.price}</StyledTableCell>
+                  <StyledTableCell align="right">{item.product.price * item.count}</StyledTableCell>
+                </StyledTableRow>);
    })
  }
 
   const payment = data.status ? "Paid" : "Failed";
+  const payment_status= ()=>{
+    if (payment== "Paid"){
+    return <h6 style={{color:"green"}}>Payment Status - {payment}</h6>
+    }else{
+    return <h6 style={{color:"red"}}>Payment Status - {payment}</h6>
+    }
+  }
 
   return <Fragment>
             <div className="container-fluid row col justify-content-center">
-              <div className="text-center card col-md-8">
-              <p>Order Date - {data && moment(data.createdAt).format('LLLL')}</p>
-              <p>Order ID - {data && data.order_id}</p>
+              <div className="text-center card col-md-9">
+              <p><b>Order Date</b> - {data && moment(data.createdAt).format('LLLL')}</p>
+              <p><b>Order ID</b> - {data && data.order_id}</p>
                   <br />
                 {data && data.status}
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="spanning table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center" colSpan={3}>
-                      <b>Details</b>
-                      </TableCell>
-                      <TableCell align="right"><b>Price</b></TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell><b>Desc</b></TableCell>
-                      <TableCell align="right"><b>Qty.</b></TableCell>
-                      <TableCell align="right"><b>Unit</b></TableCell>
-                      <TableCell align="right"><b>Sum</b></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {showOrderedProduct()}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                  <Collapse defaultActiveKey={[]} onChange={callback}>
+                    <Panel header="Order Summary" key="1">
+                      <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="spanning table">
+                          <TableHead>
+                            <TableRow>
+                              <StyledTableCell align="center" colSpan={3}>
+                              <b>Details</b>
+                              </StyledTableCell>
+                              <StyledTableCell align="right"><b>Price</b></StyledTableCell>
+                            </TableRow>
+                            <TableRow>
+                              <StyledTableCell><b>Desc</b></StyledTableCell>
+                              <StyledTableCell align="right"><b>Qty.</b></StyledTableCell>
+                              <StyledTableCell align="right"><b>Unit</b></StyledTableCell>
+                              <StyledTableCell align="right"><b>Sum</b></StyledTableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {showOrderedProduct()}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Panel>
+                  </Collapse>
                   <br />
-                <h6 style={{color:"red"}}>Payment Status - {payment}</h6>
+                {payment_status()}
               <br/>
               </div>
             </div>

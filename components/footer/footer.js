@@ -1,8 +1,37 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Svg from './footer-svg'
+import { Modal, Button } from 'antd';
 
-const Footer = () => {
+
+
+class Footer extends React.Component{ 
+    
+  state = {
+    loading: false,
+    visible: false,
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 3000);
+  };
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+    
+    render() {
+    
+    const { visible, loading } = this.state;
   return <Fragment>
             <div class="pg-footer">
                 <footer class="footer">
@@ -85,32 +114,52 @@ const Footer = () => {
                     </div>
                     <div class="footer-content-column">
                     <div class="footer-menu">
-                        <h2 class="footer-menu-name"> Quick Links</h2>
-                        <ul id="menu-quick-links" class="footer-menu-list">
-                        <li id="menu-item-168092" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-168092">
-                            <a target="_blank" rel="noopener noreferrer" href="#">Support Center</a>
-                        </li>
-                        <li id="menu-item-167418" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-167418">
-                            <a target="_blank" rel="noopener noreferrer" href="#">Service Status</a>
-                        </li>
-                        <li id="menu-item-167954" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167954">
-                            <a href="#">Security</a>
-                        </li>
-                        <li id="menu-item-167423" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167423">
-                            <a href="#">Blog</a>
-                        </li>
-                        <li id="menu-item-167955" class="menu-item menu-item-type-post_type_archive menu-item-object-customer menu-item-167955"><a href="#">Customers</a></li>
-                        <li id="menu-item-170700" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170700">
-                            <a href="#">Reviews</a>
-                        </li>
-                        </ul>
+                        <h2 class="footer-menu-name"> Registered Office</h2>
+                        <p class="footer-call-to-action-description"> 2/10, rajiv chowk,<br/>
+                         Hemant nagar,<br/>
+                         New Delhi.<br/> 206727</p>
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.8922702777113!2d77.21718531505665!3d28.632990690811134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37ebbdf4af%3A0x2be7eefccedf4b84!2sRajiv%20Chowk!5e0!3m2!1sen!2sin!4v1593776925991!5m2!1sen!2sin" width="120" height="120" frameborder="0" style={{border:"0",}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                     </div>
                     <div class="footer-content-column">
                     <div class="footer-call-to-action">
                         <h2 class="footer-call-to-action-title"> Let's Chat</h2>
                         <p class="footer-call-to-action-description"> Have a support question? Want to add SMS to your app? Need to talk to legal? Whatever the reason you need to chat, let us know and we'll give you a call.</p>
-                        <a class="footer-call-to-action-button button" href="#" target="_self"> Get in Touch </a>
+                        <a class="footer-call-to-action-button button" onClick={this.showModal}> Get in Touch </a>
+                        <Modal
+                        visible={visible}
+                        title="Do you have any question"
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                        footer={[
+                            <Button key="back" onClick={this.handleCancel}>
+                            Return
+                            </Button>,
+                            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
+                            Submit
+                            </Button>,
+                        ]}
+                        >
+                                    <form class="contact-form" id="contact-form-data">
+                                        <div class="row my-form">
+                                            <div class="col-md-12 col-sm-12 mb-1">
+                                                <div id="result"></div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <input type="text" class="form-control" id="candidate_name" name="userName" placeholder="Name" required="required"/>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <input type="email" class="form-control" id="user_email" name="userEmail" placeholder="Email" required="required"/>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <input type="text" class="form-control" id="user_subject" name="userSubject" placeholder="Subject" required="required"/>
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea class="form-control" id="user_message" name="userMessage" placeholder="Message" rows="7" required="required"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                        </Modal>
                     </div>
                     <div class="footer-call-to-action">
                         <h2 class="footer-call-to-action-title"> You Call Us</h2>
@@ -128,6 +177,6 @@ const Footer = () => {
                 </footer>
             </div>
          </Fragment>
-}
+}}
 
 export default Footer;
