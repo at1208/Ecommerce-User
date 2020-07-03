@@ -34,6 +34,8 @@ const Product = ({ data, router, slug }) => {
        })
   }
 
+  console.log(data)
+
   return <Fragment>
            <Layout data={cartItem}>
           <ToastContainer />
@@ -68,17 +70,23 @@ const Product = ({ data, router, slug }) => {
                 </div>
                 </div>
               </div> */}
-              
+
     <section className="page-add">
         <div className="container">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="page-breadcrumb">
-                        <h2>Category<span>.</span></h2>
+                        <h2>{data.result.category.name}<span>.</span></h2>
                             <Breadcrumb>
-                                <Breadcrumb.Item>Home</Breadcrumb.Item>
                                 <Breadcrumb.Item>
-                                <a href="">Category</a>
+                                  <Link href='/'>
+                                     <a>Home</a>
+                                  </Link>
+                                </Breadcrumb.Item>
+                                <Breadcrumb.Item>
+                                  <Link href={`/product/category/${data.result.category._id}`}>
+                                     <a>{data.result.category.name}</a>
+                                  </Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item>{data.result.name}</Breadcrumb.Item>
                             </Breadcrumb>
@@ -98,7 +106,7 @@ const Product = ({ data, router, slug }) => {
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
-                    
+
                     <Carousel autoplay effect="fade" >
                       <div>
                         <img
@@ -115,7 +123,7 @@ const Product = ({ data, router, slug }) => {
                         />
                       </div>
                     </Carousel>
-                </div> 
+                </div>
                 <div className="col-lg-6">
                     <div className="product-content">
                         <h2>{data.result.name}</h2>
