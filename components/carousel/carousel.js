@@ -35,7 +35,6 @@ const CarouselContainer = ({ products }) => {
 };
 
   return  <div className="carousel-container">
-          <h3>Category</h3>
            <Carousel
             swipeable={true}
             draggable={true}
