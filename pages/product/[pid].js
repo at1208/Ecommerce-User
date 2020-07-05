@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import Layout from '../../components/layout/layout';
 import { isAuth } from '../../actions/auth';
-import { getProductBySlug } from '../../actions/product';
+import { getProductBySlug,listRelatedProducts } from '../../actions/product';
+import  ProductCard from '../../components/product/card';
 import { addToCart } from '../../actions/cart'
 import { withRouter } from 'next/router';
 import { Button,Carousel,Breadcrumb,Tag } from 'antd';
@@ -9,7 +10,10 @@ import { FaShoppingCart,FaHeartbeat } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
-const Product = ({ data, router, slug }) => {
+
+
+const Product = ({ data, router, slug, relatedProducts }) => {
+
   const [cartItem, setCartItem] = useState(0);
 
   const product = {
@@ -34,42 +38,19 @@ const Product = ({ data, router, slug }) => {
        })
   }
 
-  console.log(data)
+
+    const showRelatedProducts = () => {
+        return relatedProducts && relatedProducts.map((product, i) => {
+              return <div className="col-md-3 col-sm-3 col-lg-3 m-2" key={i}>
+                       <ProductCard data={product} />
+                     </div>
+        });
+    };
+
 
   return <Fragment>
            <Layout data={cartItem}>
           <ToastContainer />
-              {/* <div className="row col justify-content-center product-detail-container">
-                <div className="col-md-5 p-1">
-                 <img className="img img-fluid" src="https://img.grouponcdn.com/deal/3H5QzVtGHYD8P51AMbu7KD1QoLr4/3H-1561x937/v1/c700x420.jpg"/>
-                </div>
-                <div className="col-md-2 p-2 text-center pt-5">
-                  <div className="pt-3 pb-5">
-                    <div className="product-detail-price pb-3">
-                      ₹{data.result.price}
-                    </div>
-                    <div className="p-1 mb-3">
-                       <Button size="large" className="product-detail-add-cart-btn" onClick={cart}>
-                           <IoMdCart className="product-detail-add-cart-btn-icon"/>
-                            Add to Cart
-                       </Button>
-                    </div>
-                    <div className="p-1">
-                    <Link href="/product/checkout/[pid]" as={`/product/checkout/${slug}`}>
-                      <Button size="large" className="product-detail-buy-btn">
-                        <FaHeartbeat className="product-detail-buy-btn-icon"/>
-                         Buy Now
-                      </Button>
-                    </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-5 p-2">
-                <div className="product-detail-pdt-name">
-                  {data.result.name}
-                </div>
-                </div>
-              </div> */}
 
     <section className="page-add">
         <div className="container">
@@ -187,9 +168,8 @@ const Product = ({ data, router, slug }) => {
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-lg-3 col-sm-6">
-                </div>
+            <div className="row col justify-content-center">
+                  {showRelatedProducts()}
             </div>
         </div>
     </section>
@@ -200,7 +180,10 @@ const Product = ({ data, router, slug }) => {
 Product.getInitialProps = ({ query }) => {
      return getProductBySlug(query.pid)
              .then((res) => {
-               return { data: res, slug:query.pid }
+                   return listRelatedProducts({ _id: res.result._id, category: res.result.category._id })
+                          .then(related => {
+                         return { data: res, slug:query.pid, relatedProducts: related }
+                          })
              })
 }
 export default withRouter(Product);

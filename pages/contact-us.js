@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/layout'
 
+
 const Contact = () => {
   return <Fragment>
             <Layout>
