@@ -201,6 +201,7 @@ export const resetPassword = resetInfo => {
 };
 
 export const userProfile = (userId,token) => {
+  console.log(userId)
     return fetch(`${process.env.NEXT_PUBLIC_API}/user/${userId}`, {
         method: 'GET',
         headers: {
