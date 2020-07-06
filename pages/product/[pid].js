@@ -10,6 +10,7 @@ import { FaShoppingCart,FaHeartbeat } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
+import renderHTML from 'react-render-html';
 
 
 const Product = ({ data, router, slug, relatedProducts }) => {
@@ -118,7 +119,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
                                 <i className="fa fa-star"></i>
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                       {renderHTML(data.result.description)} 
                         <ul className="tags">
                             <li><span>Category :</span> Category</li>
                             <li><span>Tags :</span> <Tag color="magenta">Tag1</Tag>
