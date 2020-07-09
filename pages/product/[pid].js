@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import Layout from '../../components/layout/layout';
-import { isAuth } from '../../actions/auth';
+import { isAuth ,getCookie} from '../../actions/auth';
 import { getProductBySlug,listRelatedProducts } from '../../actions/product';
 import  ProductCard from '../../components/product/card';
 import { addToCart } from '../../actions/cart'
@@ -16,6 +16,7 @@ import renderHTML from 'react-render-html';
 const Product = ({ data, router, slug, relatedProducts }) => {
 
   const [cartItem, setCartItem] = useState(0);
+  const token = getCookie('token');
 
   const product = {
     product: data && data.result._id,
@@ -25,7 +26,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
   };
 
   const cart = () => {
-    addToCart(product)
+    addToCart(product,token)
        .then(res => {
           toast.success(res.message)
           if(res.res=="ok"){
@@ -119,7 +120,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
                                 <i className="fa fa-star"></i>
                             </div>
                         </div>
-                       {renderHTML(data.result.description)} 
+                       {renderHTML(data.result.description)}
                         <ul className="tags">
                             <li><span>Category :</span> Category</li>
                             <li><span>Tags :</span> <Tag color="magenta">Tag1</Tag>

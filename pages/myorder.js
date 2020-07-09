@@ -2,14 +2,15 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Layout from '../components/layout/layout';
 import OrderCard from '../components/myorder/orderCard';
 import { allOrdersOfUser } from '../actions/order';
-import { isAuth } from '../actions/auth';
+import { isAuth,getCookie } from '../actions/auth';
 
 const MyOrder = () => {
   const [orders, setOrders] = useState();
   const userId = isAuth() && isAuth()._id
+  const token = getCookie('token');
 
   useEffect(() => {
-   allOrdersOfUser(userId)
+   allOrdersOfUser(userId,token)
      .then((res) => setOrders(res.result))
   },[])
 
