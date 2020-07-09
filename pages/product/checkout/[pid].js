@@ -3,7 +3,7 @@ import Layout from '../../../components/layout/layout';
 import { getProductBySlug } from '../../../actions/product';
 import ProductCard from '../../../components/product/checkoutCard';
 import { createOrder, orderVerify } from '../../../actions/order';
-import { isAuth } from '../../../actions/auth';
+import { isAuth,getCookie } from '../../../actions/auth';
 import { Button } from 'antd';
 import Router from 'next/router';
 
@@ -14,7 +14,7 @@ const Checkout = ({ data }) => {
   const [count, setCount] = useState(1);
   const [payStatus, setPayStatus] = useState(false)
   const [orderVerification, setOrderVerification] = useState();
-
+  const token = getCookie('token');
 
  const showProduct = () => {
      return  <div className="product-checkout-page-card card col-md-4 col-sm-5 p-2">
@@ -33,7 +33,7 @@ const Checkout = ({ data }) => {
              products: [{product: data._id, count: count, price: data.price}],
              order_amount: count*data.price }
 
-   createOrder(order)
+   createOrder(order,token)
      .then(res => {
        console.log(res)
        setOrderID(res.order_id)
@@ -68,7 +68,7 @@ const Checkout = ({ data }) => {
          razorpay_signature:response.razorpay_signature,
          userId: userId
        }
-      orderVerify(fuck)
+      orderVerify(fuck,token)
         .then((res) =>  onOrderverification(res))
         .catch(err => console.log(err))
        }

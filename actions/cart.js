@@ -1,12 +1,12 @@
 
 //ADD TO CART
-export const addToCart = product => {
-  console.log(product)
+export const addToCart = (product,token) => {
     return fetch(`${process.env.NEXT_PUBLIC_API}/cart/add-product`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(product)
     })
@@ -33,12 +33,13 @@ export const getCartProduct = (userId) => {
 
 
 //INCREMENT COUNT
-export const incrementCountCart = (cartProductId, productId) => {
+export const incrementCountCart = (cartProductId, productId,token) => {
     return fetch(`${process.env.NEXT_PUBLIC_API}/cart/increment/${cartProductId}/${productId}`, {
         method: 'PATCH',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         }
     })
         .then(response => {
@@ -49,12 +50,13 @@ export const incrementCountCart = (cartProductId, productId) => {
 
 
 //DECREMENT COUNT
-export const decrementCountCart = (cartProductId, productId) => {
+export const decrementCountCart = (cartProductId, productId,token) => {
     return fetch(`${process.env.NEXT_PUBLIC_API}/cart/decrement/${cartProductId}/${productId}`, {
         method: 'PATCH',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         },
     })
         .then(response => {

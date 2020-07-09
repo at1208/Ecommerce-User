@@ -36,7 +36,7 @@ const App = () => {
 
 useEffect(() => {
   userProfile(userId, token)
-  .then((value) => setUserAddress(value.address))
+  .then((value) => setUserAddress(value.address.city))
   .catch((err) => {console.log(err)})
 
   getAllCategory()
@@ -68,7 +68,7 @@ const showCategories = () => {
       >
       <div className="pb-5">
       {isAuth() && <div className="drawer-address-container">
-        <div className="drawer-address-title">{userAddress}</div>
+        <div className="drawer-address-title text-center">{userAddress}</div>
       </div>}
       {!isAuth() &&
           <div className="d-none d-sm-block d-md-none d-block d-sm-none">

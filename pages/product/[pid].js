@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import Layout from '../../components/layout/layout';
-import { isAuth } from '../../actions/auth';
-import { getProductBySlug } from '../../actions/product';
+import { isAuth ,getCookie} from '../../actions/auth';
+import { getProductBySlug,listRelatedProducts } from '../../actions/product';
+import  ProductCard from '../../components/product/card';
 import { addToCart } from '../../actions/cart'
 import { withRouter } from 'next/router';
 import { Button,Breadcrumb,Tag } from 'antd';
@@ -11,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
 import ImageGallery from 'react-image-gallery';
 
+import renderHTML from 'react-render-html';
 const images = [
   {
     original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
@@ -26,8 +28,12 @@ const images = [
   },
 ];
 
-const Product = ({ data, router, slug }) => {
+
+
+const Product = ({ data, router, slug, relatedProducts }) => {
+
   const [cartItem, setCartItem] = useState(0);
+  const token = getCookie('token');
 
   const product = {
     product: data && data.result._id,
@@ -37,7 +43,7 @@ const Product = ({ data, router, slug }) => {
   };
 
   const cart = () => {
-    addToCart(product)
+    addToCart(product,token)
        .then(res => {
           toast.success(res.message)
           if(res.res=="ok"){
@@ -51,7 +57,15 @@ const Product = ({ data, router, slug }) => {
        })
   }
 
-  console.log(data)
+
+    const showRelatedProducts = () => {
+        return relatedProducts && relatedProducts.map((product, i) => {
+              return <div className="col-md-3 col-sm-3 col-lg-3 m-2" key={i}>
+                       <ProductCard data={product} />
+                     </div>
+        });
+    };
+
 
   return <Fragment>
            <Layout data={cartItem}>
@@ -138,7 +152,7 @@ const Product = ({ data, router, slug }) => {
                                 <i className="fa fa-star"></i>
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                       {renderHTML(data.result.description)}
                         <ul className="tags">
                             <li><span>Category :</span> Category</li>
                             <li><span>Tags :</span> <Tag color="magenta">Tag1</Tag>
@@ -188,9 +202,8 @@ const Product = ({ data, router, slug }) => {
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-lg-3 col-sm-6">
-                </div>
+            <div className="row col justify-content-center">
+                  {showRelatedProducts()}
             </div>
         </div>
     </section>
@@ -202,7 +215,10 @@ const Product = ({ data, router, slug }) => {
 Product.getInitialProps = ({ query }) => {
      return getProductBySlug(query.pid)
              .then((res) => {
-               return { data: res, slug:query.pid }
+                   return listRelatedProducts({ _id: res.result._id, category: res.result.category._id })
+                          .then(related => {
+                         return { data: res, slug:query.pid, relatedProducts: related }
+                          })
              })
 }
 export default withRouter(Product);

@@ -3,7 +3,7 @@ import Layout from '../../../../components/layout/layout';
 import {Button} from 'antd';
 import { getCartProduct } from '../../../../actions/cart';
 import { createOrder, orderVerify } from '../../../../actions/order';
-import { isAuth } from '../../../../actions/auth';
+import { isAuth,getCookie } from '../../../../actions/auth';
 import CheckoutComponent from '../../../../components/checkout/checkout';
 import Router from 'next/router';
 
@@ -13,7 +13,7 @@ const Checkout = () => {
   const [orderID, setOrderID]= useState();
   const [payStatus, setPayStatus] = useState(false)
   const [orderVerification, setOrderVerification] = useState();
-
+  const token = getCookie('token');
 
   useEffect(() => {
     getCartProduct(userId)
@@ -46,7 +46,7 @@ const product = () => {
              userId: userId,
              products: product(),
              order_amount: totalPrice() }
-   createOrder(order)
+   createOrder(order,token)
      .then(res => {
        setOrderID(res.order_id)
        setPayStatus(true)
@@ -79,7 +79,7 @@ const product = () => {
         razorpay_signature:response.razorpay_signature,
         userId: userId
       }
-     orderVerify(fuck)
+     orderVerify(fuck,token)
        .then((res) => onOrderverification(res))
        .catch(err => console.log(err))
       }

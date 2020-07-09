@@ -11,7 +11,10 @@ const Profile = () => {
 
  var [values, setValues] = useState({
    name: '',
-   address: '',
+   flatNumber: '',
+   streetName: '',
+   city: '',
+   pinCode: '',
    email: '',
    _id: ''
  })
@@ -19,16 +22,15 @@ const Profile = () => {
 useEffect(() => {
    userProfile(userId, token)
     .then((value) => {
-    setValues({...values, name: value.name, email:value.email, address: value.address, _id: value._id})
+    setValues({...values, name: value.name, email:value.email, flatNumber: value.address.flatNumber,streetName:value.address.streetName,city:value.address.city, pinCode:value.address.pinCode, _id: value._id})
     })
     .catch((err) => {console.log(err)})
  },[])
 
-console.log(values)
-  const { name, email, address, _id } = values
+  const { name, email, flatNumber,streetName,city,pinCode, _id } = values
 
   const updateUserInfo = () => {
-    updateProfile({userId:  _id, name: name, address: address}, token)
+    updateProfile({userId:  _id, name: name, flatNumber, streetName, city, pinCode}, token)
         .then(res => toast.success(res.message))
         .catch(err => toast.error(err.error))
   }
@@ -53,16 +55,52 @@ console.log(values)
                  setValues({...values, name: e.target.value})
                }} />
 
-              <small>Address</small>
-               <TextArea
-               rows={3}
-               fullWidth
-               size="large"
-               value={address}
-               className="profile-input"
-               onChange={(e) => {
-                  setValues({...values, address: e.target.value})
-               }} />
+
+               <small>Flat no.</small>
+                <TextArea
+                rows={1}
+                fullWidth
+                size="large"
+                value={flatNumber}
+                className="profile-input"
+                onChange={(e) => {
+                   setValues({...values, flatNumber: e.target.value})
+                }} />
+
+
+                <small>street name</small>
+                 <TextArea
+                 rows={1}
+                 fullWidth
+                 size="large"
+                 value={streetName}
+                 className="profile-input"
+                 onChange={(e) => {
+                    setValues({...values,streetName: e.target.value})
+                 }} />
+
+
+                 <small>city</small>
+                  <TextArea
+                  rows={1}
+                  fullWidth
+                  size="large"
+                  value={city}
+                  className="profile-input"
+                  onChange={(e) => {
+                     setValues({...values, city: e.target.value})
+                  }} />
+
+                  <small>pincode</small>
+                   <TextArea
+                   rows={1}
+                   fullWidth
+                   size="large"
+                   value={pinCode}
+                   className="profile-input"
+                   onChange={(e) => {
+                      setValues({...values, pinCode: e.target.value})
+                   }} />
 
              <small>Email</small>
                <Input

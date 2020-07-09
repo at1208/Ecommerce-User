@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
-
 import Router from 'next/router';
 
 
@@ -201,6 +200,7 @@ export const resetPassword = resetInfo => {
 };
 
 export const userProfile = (userId,token) => {
+  console.log(userId)
     return fetch(`${process.env.NEXT_PUBLIC_API}/user/${userId}`, {
         method: 'GET',
         headers: {

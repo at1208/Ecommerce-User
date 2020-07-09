@@ -3,18 +3,20 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { GrAdd,GrSubtract } from "react-icons/gr";
 import {incrementCountCart, decrementCountCart} from '../../actions/cart';
-
+import { getCookie } from '../../actions/auth'
 const Cart = ({ data }) => {
 
 const [count, setCount] = useState();
+const token = getCookie('token');
+
 const increment = () => {
-  incrementCountCart(data._id, data.product)
+  incrementCountCart(data._id, data.product,token)
      .then((value) => setCount(value.data.count))
      .catch((err) => { console.log(err)})
 }
 
 const decrement = () => {
-  decrementCountCart(data._id, data.product)
+  decrementCountCart(data._id, data.product,token)
      .then((value) =>  setCount(value.data.count))
      .catch((err) => { console.log(err)})
 }
