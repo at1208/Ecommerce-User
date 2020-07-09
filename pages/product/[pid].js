@@ -4,11 +4,28 @@ import { isAuth } from '../../actions/auth';
 import { getProductBySlug } from '../../actions/product';
 import { addToCart } from '../../actions/cart'
 import { withRouter } from 'next/router';
-import { Button,Carousel,Breadcrumb,Tag } from 'antd';
+import { Button,Breadcrumb,Tag } from 'antd';
 import { FaShoppingCart,FaHeartbeat } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
+import ImageGallery from 'react-image-gallery';
+
+const images = [
+  {
+    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+  },
+  {
+    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+  },
+  {
+    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
+  },
+];
+
 const Product = ({ data, router, slug }) => {
   const [cartItem, setCartItem] = useState(0);
 
@@ -70,8 +87,8 @@ const Product = ({ data, router, slug }) => {
                 </div>
                 </div>
               </div> */}
-
-    <section className="page-add">
+    <div >
+    <section className="page-add" >
         <div className="container">
             <div className="row">
                 <div className="col-lg-4">
@@ -97,32 +114,16 @@ const Product = ({ data, router, slug }) => {
     </section>
 
 
-    <section className="product-page">
+    <section className="product-page" >
         <div className="container">
             <div className="row">
-                <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" style={{width: "20rem", height: "20rem"}}>
-                    <ol className="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-
-                    <Carousel autoplay effect="fade" >
-                      <div>
-                        <img
-                        alt="Product Image"
-                        src="https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512"
-                        style={{ width:"100%"}}
-                        />
-                      </div>
-                      <div>
-                        <img
-                        alt="Product Image"
-                        src="https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512"
-                        style={{ width:"100%"}}
-                        />
-                      </div>
-                    </Carousel>
+                <div style={{width: "25rem", height: "25rem"}}>
+                    <ImageGallery 
+                      items={images}
+                      showBullets={false}
+                      showIndex={true}
+                      lazyLoad={true}
+                      showPlayButton={false}/>
                 </div>
                 <div className="col-lg-6">
                     <div className="product-content">
@@ -193,6 +194,7 @@ const Product = ({ data, router, slug }) => {
             </div>
         </div>
     </section>
+    </div>
            </Layout>
          </Fragment>
 }
