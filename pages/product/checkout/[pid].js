@@ -4,7 +4,7 @@ import { getProductBySlug } from '../../../actions/product';
 import ProductCard from '../../../components/product/checkoutCard';
 import { createOrder, orderVerify } from '../../../actions/order';
 import { isAuth,getCookie } from '../../../actions/auth';
-import Private from '../../../components/auth/private'
+import Private from '../../../components/auth/Private'
 import { Button } from 'antd';
 import Router from 'next/router';
 
