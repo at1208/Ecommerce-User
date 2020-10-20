@@ -9,7 +9,7 @@ import openSocket from 'socket.io-client';
 const App = ({ data }) => {
 
 useEffect(() => {
-  const socket = openSocket("http://localhost:8000");
+  const socket = openSocket(process.env.NEXT_PUBLIC_SERVER);
   if(process.browser===window){socket.on('online')}
 },[])
 

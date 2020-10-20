@@ -5,6 +5,7 @@ import { getCartProduct } from '../../../../actions/cart';
 import { createOrder, orderVerify } from '../../../../actions/order';
 import { isAuth,getCookie } from '../../../../actions/auth';
 import CheckoutComponent from '../../../../components/checkout/checkout';
+import Private from '../../../../components/auth/private';
 import Router from 'next/router';
 
 const Checkout = () => {
@@ -94,6 +95,7 @@ if(payStatus){
 }
 
   return <Fragment>
+          <Private>
             <Layout>
                <div className="checkoutpage-container">
                   <CheckoutComponent pay={totalPrice()} product={cartProduct}/>
@@ -104,6 +106,7 @@ if(payStatus){
                  </Button>
                </div>
             </Layout>
+          </Private>
          </Fragment>
 }
 

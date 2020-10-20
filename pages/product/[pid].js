@@ -13,24 +13,19 @@ import Link from 'next/link'
 import ImageGallery from 'react-image-gallery';
 
 import renderHTML from 'react-render-html';
-const images = [
-  {
-    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-  },
-  {
-    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-  },
-  {
-    original: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-    thumbnail: 'https://cdn.shopify.com/s/files/1/0070/7032/files/camera_56f176e3-ad83-4ff8-82d8-d53d71b6e0fe.jpg?v=1527089512',
-  },
-];
+
 
 
 
 const Product = ({ data, router, slug, relatedProducts }) => {
+
+
+  const images = [
+    {
+      original: data.result.photoURL,
+      thumbnail: data.result.photoURL,
+    }
+  ];
 
   const [cartItem, setCartItem] = useState(0);
   const token = getCookie('token');
@@ -132,7 +127,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
         <div className="container">
             <div className="row">
                 <div style={{width: "25rem", height: "25rem"}}>
-                    <ImageGallery 
+                    <ImageGallery
                       items={images}
                       showBullets={false}
                       showIndex={true}
@@ -153,7 +148,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
                             </div>
                         </div>
                        {renderHTML(data.result.description)}
-                        <ul className="tags">
+                        {/*<ul className="tags">
                             <li><span>Category :</span> Category</li>
                             <li><span>Tags :</span> <Tag color="magenta">Tag1</Tag>
                                                     <Tag color="red">Tag2</Tag>
@@ -166,7 +161,7 @@ const Product = ({ data, router, slug, relatedProducts }) => {
                                                     <Tag color="blue">Tag8</Tag>
                                                     <Tag color="geekblue">Tag9</Tag>
                                                     <Tag color="purple">Tag10</Tag></li>
-                        </ul>
+                        </ul>*/}
                         <div className="p-1 mb-3">
                         <Button size="large" className="product-detail-add-cart-btn" onClick={cart}>
                             <IoMdCart className="product-detail-add-cart-btn-icon"/>
@@ -181,11 +176,11 @@ const Product = ({ data, router, slug, relatedProducts }) => {
                         </Button>
                         </Link>
                         </div>
-                        <ul className="p-info">
+                      {/*  <ul className="p-info">
                             <li>Product Information</li>
                             <li>Reviews</li>
                             <li>Product Care</li>
-                        </ul>
+                        </ul>*/}
                     </div>
                 </div>
             </div>
