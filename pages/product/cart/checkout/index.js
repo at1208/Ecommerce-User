@@ -5,7 +5,7 @@ import { getCartProduct } from '../../../../actions/cart';
 import { createOrder, orderVerify } from '../../../../actions/order';
 import { isAuth,getCookie } from '../../../../actions/auth';
 import CheckoutComponent from '../../../../components/checkout/checkout';
-import Private from '../../../../components/auth/private';
+import Private from '../../../../components/auth/Private';
 import Router from 'next/router';
 
 const Checkout = () => {
