@@ -52,7 +52,7 @@ const Header = ({ data }) => {
                 <div className="col-2 header-col-2">
                 <Link href="/"><a>Geekstore</a></Link>
                 </div>
-                <div className="col-md-5 header-col-3 text-center pl-2 pr-2">
+                <div className="col-md-5 header-col-3">
                  <Search />
                 </div>
                 <div className="col-4 col-sm-4 header-col-5 pt-1 row justify-content-center">
