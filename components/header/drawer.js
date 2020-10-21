@@ -35,9 +35,11 @@ const App = () => {
 }
 
 useEffect(() => {
-  userProfile(userId, token)
-  .then((value) => setUserAddress(value.address.city))
-  .catch((err) => {console.log(err)})
+  if(token && userId){
+    userProfile(userId, token)
+    .then((value) => setUserAddress(value.address.city))
+    .catch((err) => {console.log(err)})
+  }
 
   getAllCategory()
     .then((res) => setCategories(res))

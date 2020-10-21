@@ -19,9 +19,11 @@ const Header = ({ data }) => {
   const [state,setState] = useState(true)
 
   useEffect(() => {
-    getCartProduct(userId)
-         .then(res => setCartItem(res.result.length))
-         .catch(err => console.log(err))
+    if(userId){
+      getCartProduct(userId)
+           .then(res => setCartItem(res.result.length))
+           .catch(err => console.log(err))
+    }
   },[])
 
 
