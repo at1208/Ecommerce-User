@@ -35,7 +35,7 @@ const HeaderSearch = () => {
                  })
                  .catch(err => console.log(err))
             }}
-            onSearch={value => Router.replace(`/product/search/${term}`)}
+            enterButton={false}	
             className="search-input-bar"/>
 
              <div className="search-bar-result-container">
