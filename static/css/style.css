@@ -1,6 +1,9 @@
 body {
     background-color: #f1f3f6!important;
 }
+a{
+  color: white!important;
+}
 .MuiToolbar-root{
   background-color: #212529!important;
 max-height: 65px!important;
