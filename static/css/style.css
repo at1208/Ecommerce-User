@@ -10,8 +10,7 @@ max-height: 65px!important;
 }
 
 .ant-input-group-addon{
-  background-color: #212529!important;
-
+  width: 0px!important;
 }
 
 
@@ -387,7 +386,7 @@ max-height: 65px!important;
 
 .ant-input-group-addon {
     background-color: #ffffff!important;
-    width: 85px!important;
+    /* width: 85px!important; */
     /* color: white!important; */
     font-weight: lighter!important;
     border-radius: 6px 0px 0px 6px!important;

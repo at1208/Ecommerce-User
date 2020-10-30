@@ -35,7 +35,7 @@ const HeaderSearch = () => {
                  })
                  .catch(err => console.log(err))
             }}
-            enterButton={false}	
+            enterButton={true}	
             className="search-input-bar"/>
 
              <div className="search-bar-result-container">
