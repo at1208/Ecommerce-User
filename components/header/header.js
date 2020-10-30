@@ -225,20 +225,20 @@ const Header = ({ data }) => {
             <Search />
          </div>
          <div className={classes.grow} />
-         <div className={classes.sectionDesktop}>
-         {<Link href="/product/cart">
-           <a>
-              <IconButton>
-                <StyledBadge badgeContent={cartItem} color="secondary">
-                  <ShoppingCartIcon className="header-cart-icon"/>
-                </StyledBadge>
-              </IconButton>
-          </a>
-        </Link>}
+         <div className="row">
+          <Link href="/product/cart">
+             <a>
+                <IconButton>
+                  <StyledBadge badgeContent={cartItem} color="secondary">
+                    <ShoppingCartIcon className="header-cart-icon"/>
+                  </StyledBadge>
+                </IconButton>
+            </a>
+          </Link>
         {
           !isAuth() &&
           <div className="d-none d-md-block d-lg-none d-lg-block d-xl-block">
-              <div className="row   header-access-container ">
+              <div className="row  header-access-container pt-2">
                  <SignIn size="small"/>
                  <SignUp size="small"/>
               </div>
