@@ -25,6 +25,7 @@ const HeaderSearch = () => {
 
   return <Fragment>
               <Search
+          
             placeholder="Search Product"
             onChange={(e) => {
                setTerm(e.target.value)
