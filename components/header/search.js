@@ -10,9 +10,10 @@ const HeaderSearch = () => {
   const [searchResult, setSearchResult] = useState();
   const [term, setTerm] = useState();
 
+
   const showSearchResult = () => {
     return searchResult && searchResult.map((item, i) => {
-      return <Link href="/product/search/[pid]" as={`/product/search/${item.name}`}>
+      return <Link href="/product/[pid]" as={`/product/${item.slug}`}>
                 <a>
                    <div className="search-each-result" key={i}>
                       {item.name}
@@ -25,7 +26,6 @@ const HeaderSearch = () => {
 
   return <Fragment>
               <Search
-          
             placeholder="Search Product"
             onChange={(e) => {
                setTerm(e.target.value)
@@ -36,8 +36,8 @@ const HeaderSearch = () => {
                  .catch(err => console.log(err))
             }}
             onSearch={value => Router.replace(`/product/search/${term}`)}
-            className="search-input-bar"
-            />
+            className="search-input-bar"/>
+
              <div className="search-bar-result-container">
              {term && showSearchResult()}
              </div>

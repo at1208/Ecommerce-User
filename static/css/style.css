@@ -6,6 +6,10 @@ body {
 max-height: 65px!important;
 }
 
+.ant-input-group-addon{
+  background-color: #212529!important;
+
+}
 /* Header */
 
 .header-nav-bar {

@@ -216,7 +216,11 @@ const Header = ({ data }) => {
           <Drawer />
          </IconButton>
          <Typography className={classes.title} variant="h6" noWrap>
-          Geekstore
+           <Link href="/">
+             <a>
+               Geekstore
+             </a>
+             </Link>
          </Typography>
          <div className={classes.search}>
            <div className={classes.searchIcon}>
