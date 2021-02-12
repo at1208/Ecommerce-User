@@ -5,8 +5,8 @@ import { Modal, Button } from 'antd';
 
 
 
-class Footer extends React.Component{ 
-    
+class Footer extends React.Component{
+
   state = {
     loading: false,
     visible: false,
@@ -28,9 +28,9 @@ class Footer extends React.Component{
   handleCancel = () => {
     this.setState({ visible: false });
   };
-    
+
+
     render() {
-    
     const { visible, loading } = this.state;
   return <Fragment>
             <div class="pg-footer">
@@ -48,6 +48,7 @@ class Footer extends React.Component{
                     </div>
                     <div class="footer-menu">
                         <h2 class="footer-menu-name"> About</h2>
+                       <ul class="footer-menu-list">Admin</ul> 
                         <ul id="menu-get-started" class="footer-menu-list">
 
 
